@@ -65,11 +65,6 @@
       .attr("transform", "translate(0," + height + ")")
       .call(xAxis);
 
-    // function type(d) {
-    //   d.value = +d.value;
-    //   return d;
-    // }
-
     function defaultFunction() {
       d3.json("data1.json", function(error, newdata) {
         if (error) throw error;
