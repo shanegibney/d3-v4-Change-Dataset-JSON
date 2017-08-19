@@ -67,7 +67,7 @@
       .call(xAxis);
 
     function defaultFunction() {
-      d3.json("data2.json", function(error, newdata) {
+      d3.json("data1.json", function(error, newdata) {
         if (error) throw error;
         data = newdata;
         data.forEach(function(d) {
@@ -78,7 +78,7 @@
     }
 
     function updateFunction() {
-      d3.json("data1.json", function(error, newdata) {
+      d3.json("data2.json", function(error, newdata) {
         if (error) throw error;
         data = newdata;
         update();
