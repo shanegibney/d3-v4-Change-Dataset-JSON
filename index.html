@@ -41,6 +41,7 @@
       },
       width = outerWidth - margin.left - margin.right,
       height = outerHeight - margin.top - margin.bottom;
+    var barWidth = 20;
 
     var x = d3.scaleBand()
       .range([0, width]);
@@ -69,9 +70,9 @@
       d3.json("data1.json", function(error, newdata) {
         if (error) throw error;
         data = newdata;
-        // data.foreach(function(d) {
-        //   d.value = +d.value;
-        // })
+        data.forEach(function(d) {
+          d.value = +d.value;
+        })
         update();
       });
     }
@@ -94,10 +95,11 @@
       }));
 
       // x-axis
-      chart.select(".x.axis").remove();
+      // chart.select(".x.axis").remove();
+      chart.select(".x.axis").call(xAxis)
       chart.append("g")
         .attr("class", "x axis")
-        .call(xAxis)
+        // .call(xAxis)
         .append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 6)
@@ -126,7 +128,7 @@
       bar.enter().append("rect")
         .attr("class", "bar")
         .attr("x", function(d) {
-          return x(d.name);
+          return x(d.name) + (width / 4 / 2) - (barWidth / 2);
         })
         .attr("y", function(d) {
           return y(d.value);
@@ -134,7 +136,7 @@
         .attr("height", function(d) {
           return height - y(d.value);
         })
-        .attr("width", 20);
+        .attr("width", barWidth);
 
       // removed data:
       bar.exit().remove();
